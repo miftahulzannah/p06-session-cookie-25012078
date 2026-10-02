@@ -24,4 +24,3 @@ function pullFlash(): ?string
 function cartCount(array $cart): int
 {
     return array_sum(array_map('intval', $cart));
-}
