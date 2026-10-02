@@ -7,7 +7,7 @@ $products = require __DIR__ . '/data/products.php';
 
 $flash = pullFlash();
 
-require __DIR__ . '/components/header.php';
+require __DIR__ . '/data/components/header.php';
 ?>
 
 <?php if ($flash !== null): ?>
@@ -61,5 +61,5 @@ require __DIR__ . '/components/header.php';
 </div>
 
 <?php
-require __DIR__ . '/components/footer.php';
+require __DIR__ . '/data/components/footer.php';
 ?>
