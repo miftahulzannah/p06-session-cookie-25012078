@@ -1,0 +1,8 @@
+.env
+vendor/
+.idea/
+.vscode/
+git status
+git add README.md .gitignore
+git commit -m "docs: inisialisasi proyek dan petunjuk praktikum"
+git push -u origin main
