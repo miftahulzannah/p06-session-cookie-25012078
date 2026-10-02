@@ -1,52 +1,65 @@
 <?php
 
 require_once __DIR__ . '/bootstrap.php';
+require_once __DIR__ . '/functions.php';
 
-$products = [
-    [
-        'id' => 1,
-        'nama' => 'Kopi Susu',
-        'harga' => 15000
-    ],
-    [
-        'id' => 2,
-        'nama' => 'Matcha Latte',
-        'harga' => 18000
-    ],
-    [
-        'id' => 3,
-        'nama' => 'Cokelat',
-        'harga' => 17000
-    ]
-];
+$products = require __DIR__ . '/data/products.php';
 
+$flash = pullFlash();
+
+require __DIR__ . '/components/header.php';
 ?>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Katalog Produk</title>
-</head>
-<body>
 
-    <h1>Katalog Produk</h1>
+<?php if ($flash !== null): ?>
 
-    <?php foreach ($products as $product): ?>
-        <div>
-            <h3><?= htmlspecialchars($product['nama']) ?></h3>
-            <p>Rp <?= number_format($product['harga'], 0, ',', '.') ?></p>
+    <div class="flash">
+        <?= e($flash) ?>
+    </div>
 
-            <form action="actions.php" method="post">
-                <input type="hidden" name="action" value="add">
-                <input type="hidden" name="id" value="<?= $product['id'] ?>">
-                <button type="submit">Tambah ke Keranjang</button>
+<?php endif; ?>
+
+<h2>Daftar Produk</h2>
+
+<div class="products">
+
+    <?php foreach ($products as $id => $product): ?>
+
+        <div class="card">
+
+            <h3>
+                <?= e($product['nama']) ?>
+            </h3>
+
+            <p>
+                Rp <?= number_format($product['harga'], 0, ',', '.') ?>
+            </p>
+
+            <form action="actions.php" method="POST">
+
+                <input
+                    type="hidden"
+                    name="action"
+                    value="add"
+                >
+
+                <input
+                    type="hidden"
+                    name="id"
+                    value="<?= $id ?>"
+                >
+
+                <button type="submit">
+                    Tambah ke Keranjang
+                </button>
+
             </form>
+
         </div>
-        <hr>
+
     <?php endforeach; ?>
 
-</body>
-</html>
+</div>
 
-@Mimi
+<?php
+require __DIR__ . '/components/footer.php';
+?>
